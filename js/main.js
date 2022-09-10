@@ -1,6 +1,5 @@
 import { Utils } from "./Utils/utils.js";
-
-
+import * as appComp from "./components/app-comp.js"
 export const a = () => {
     const u = Utils
     console.log(u.random(10))
@@ -9,7 +8,6 @@ export const a = () => {
 
         }
     }
-
     window.addEventListener("popstate", event => {
         // Grab the history state id
         //  let stateId = event.state.id;

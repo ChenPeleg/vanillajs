@@ -1,0 +1,26 @@
+body {
+    background-color: rgb(167, 241, 241);
+    background: radial-gradient(circle, rgba(203, 209, 237, 1) 0%, rgba(221, 192, 198, 1) 100%);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding: 0rem 1rem 1rem 1rem;
+    font-size: 24px;
+}
+
+h1 {
+    font-size: 3.5rem;
+    color: rgb(90, 59, 14);
+    text-shadow: 2px 4px 4px rgba(27, 27, 26, 0.5), 1px 1px 1px rgba(230, 241, 230, 0.5);
+}
+
+a.main-links {
+    font-size: 1em;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 3px;
+    background-color: aquamarine;
+    transition: background-color 100ms;
+}
+
+a.main-links:hover {
+    background-color: rgb(255, 246, 127);
+}
