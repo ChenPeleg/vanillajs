@@ -38,6 +38,11 @@ a.main-links {
     transition: background-color 100ms;
 }
 
-a.main-links:hover {
+a.main-links.active {
     background-color: rgb(255, 246, 127);
+
+}
+
+a.main-links:hover:not(.active) {
+    background-color: rgb(252, 244, 143);
 }

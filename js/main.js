@@ -1,21 +1,38 @@
 import { Utils } from "./Utils/utils.js";
 import * as appComp from "./components/app-comp.js"
-export const a = () => {
-    const u = Utils
-    console.log(u.random(10))
-    class mainApp {
-        constructor() {
 
-        }
+
+class mainApp {
+    constructor() {
+        window.addEventListener("popstate",
+            this.popHandler
+        );
+        this.setRouterOutlet()
     }
-    window.addEventListener("popstate", event => {
-        // Grab the history state id
-        //  let stateId = event.state.id;
-        // Show clicked id in console (just for fun)
-        console.log(window.location.hash);
-        // Visually select the clicked button/tab/box
-        //select_tab(stateId);
-        // Load content for this tab/page
-        //load_content(stateId);
-    });
+    popHandler(ev) {
+        const route = window.location.hash.replace("#", '');
+        const mainLinks = /**@type {NodeListOf <HTMLAnchorElement>} */ (document.querySelectorAll('a.main-links'))
+        mainLinks.forEach(l => {
+            if (l.href.includes(route)) {
+                l.classList.add('active')
+            } else
+                l.classList.remove('active')
+        })
+
+    }
+    setRouterOutlet() {
+        try {
+            const appmain =  /**@type {Element & {shadowRoot}} */(document.querySelector("app-main"));
+            const outlet = /**@type {Element} */(appmain.shadowRoot.querySelector('#router-outlet'));
+            this.routerOutlet = outlet;
+        } catch (e) {
+            setTimeout(() => this.setRouterOutlet(), 1000)
+        }
+
+
+    }
 }
+const app = new mainApp();
+
+
+export { app }

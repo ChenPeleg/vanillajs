@@ -6,39 +6,36 @@ template.innerHTML = `
     div {
       margin-top: 20px;
       color: green;
+      // background-color: white;
+      min-height : 80vh;
     }
   </style>
   <div>
-    <p>The Google search result of your name is <a target="_blank" rel="noopener">here</a></p>
+  <div id="router-outlet"></div>
+   App main
   </div>
 `;
 
 class SearchResult extends HTMLElement {
-    constructor() {
-        super();
-        this.attachShadow({ mode: 'open' });
-        /**@type  {ShadowRoot}*/
-        // @ts-ignore
-        this.shadowRoot.appendChild(template.content.cloneNode(true));
-        // @ts-ignore
-        this.shadowRoot.querySelector('a').href = '';
-    }
+  constructor() {
+    super();
+    this.attachShadow({ mode: 'open' });
+    /**@type  {ShadowRoot}*/
+    // @ts-ignore
+    this.shadowRoot.appendChild(template.content.cloneNode(true));
 
-    static get observedAttributes() {
-        return ['name-attribute'];
-    }
+  }
 
-    attributeChangedCallback(name, oldValue, newValue) {
-        if (name == 'name-attribute') {
-            // @ts-ignore
-            this.shadowRoot.querySelector(
-                'a'
-            ).href = `https://www.google.com/search?q=${newValue}`;
-        }
-    }
+  static get observedAttributes() {
+    return ['name-attribute'];
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+
+  }
 }
 
-window.customElements.define('search-result', SearchResult);
+window.customElements.define('app-main', SearchResult);
 
 export {
 
