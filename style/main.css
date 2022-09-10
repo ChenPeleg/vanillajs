@@ -6,13 +6,30 @@ body {
     font-size: 24px;
 }
 
-h1 {
+header {
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+}
+
+.link-container {
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    align-items: center;
+}
+
+h3 {
+    margin: 0px;
     font-size: 3.5rem;
     color: rgb(90, 59, 14);
     text-shadow: 2px 4px 4px rgba(27, 27, 26, 0.5), 1px 1px 1px rgba(230, 241, 230, 0.5);
 }
 
+.divider {}
+
 a.main-links {
+    margin: 10px 15px 10px 15px;
     font-size: 1em;
     text-decoration: none;
     padding: 10px;
