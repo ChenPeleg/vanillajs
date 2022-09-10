@@ -1,4 +1,4 @@
-import { Utils } from "./Utils/utils";
+import { Utils } from "./Utils/utils.js";
 
 
 export const a = () => {
