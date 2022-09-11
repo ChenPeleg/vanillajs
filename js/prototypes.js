@@ -1,6 +1,6 @@
 class ProtoTypes {
     constructor() {
-
+        this.isActiveRoute = false;
     }
 
     showChain(obj) {

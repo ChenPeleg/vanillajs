@@ -1,7 +1,7 @@
 import { Utils } from "./Utils/utils.js";
-import * as appComp from "./components/app-comp.js"
+//import * as appComp from "./components/app-comp.js"
 import { RouteModel } from "./models/routes-model.js";
-import { Routes, RoutesEnum } from "./models/routes.js";
+import { RoutesEnum } from "./models/routes.js";
 
 
 class mainApp {
@@ -12,8 +12,22 @@ class mainApp {
         window.addEventListener("popstate",
             this.popHandler
         );
+        this.createRouterLinks()
         this.setElementPointers()
+    }
+    createRouterLinks() {
 
+        const linkContainer =  /**@type {HTMLDivElement} */(document.querySelector('#the-link-container'));
+
+        Object.keys(RoutesEnum).forEach(routeName => {
+            const a = document.createElement('a');
+            a.className = 'main-links';
+            a.href = '#' + routeName;
+            a.innerHTML = routeName;
+            linkContainer.appendChild(a)
+
+            console.log(routeName)
+        })
     }
 
     popHandler(ev) {
