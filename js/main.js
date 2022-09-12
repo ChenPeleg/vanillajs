@@ -2,6 +2,9 @@ import { Utils } from "./Utils/utils.js";
 //import * as appComp from "./components/app-comp.js"
 import { PageModel } from "./models/page-model.js";
 import { RoutesEnum } from "./models/routes.js";
+import { About } from "./pages/about.js";
+import { Closure } from "./pages/closure.js";
+import { ProtoTypes } from "./pages/prototypes.js";
 
 
 class mainApp {
@@ -23,7 +26,7 @@ class mainApp {
             const page = new PageModel(RoutesEnum[key]);
             switch (RoutesEnum[key]) {
                 case RoutesEnum.about:
-                    page.classPointer = new Abou();
+                    page.classPointer = new About();
                     break;
                 case RoutesEnum.closure:
                     page.classPointer = new Closure();

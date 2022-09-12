@@ -19,4 +19,4 @@ export const RoutesEnum = {
     about: 1,
     closure: 2,
 };
-//EnumValidator(RoutesEnum)
+EnumValidator(RoutesEnum)
