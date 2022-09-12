@@ -1,7 +1,19 @@
 
 
-export class RoutesEnum {
-    static protoype = Symbol('Protoype');
-    static about = Symbol('about');
+// export class RoutesEnumOld {
+//     static protoype = Symbol('Protoype');
+//     static about = Symbol('about');
+//     protoype = Symbol('Protoype');
+//     about = Symbol('about');
+//     closure = Symbol('closure')
+//     constructor() {
 
-}
+//     }
+// }
+
+/** @enum {number} */
+export const RoutesEnum = {
+    protoype: 0,
+    about: 1,
+    closure: 2,
+};

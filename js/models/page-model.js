@@ -1,4 +1,4 @@
-export class RouteModel {
+export class PageModel {
     constructor(route, element) {
 
         this.route = route;

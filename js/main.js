@@ -1,17 +1,20 @@
 import { Utils } from "./Utils/utils.js";
 //import * as appComp from "./components/app-comp.js"
-import { RouteModel } from "./models/routes-model.js";
+import { PageModel } from "./models/page-model.js";
 import { RoutesEnum } from "./models/routes.js";
 
 
 class mainApp {
-    static CreateRoutes() {
+
+    static CreatePages() {
 
     }
 
-    /**@type {RouteModel []} */
+    /**@type {PageModel []} */
     mainLinks;
     constructor() {
+        /**@type {Record<keyof RoutesEnum,PageModel>} */
+        //  this.pages = {};
         window.addEventListener("popstate",
             this.popHandler
         );
@@ -44,7 +47,7 @@ class mainApp {
                 l.classList.remove('active')
         })
     }
-    /** @type {(link : RouteModel)=> void} */
+    /** @type {(link : PageModel)=> void} */
     activateRouteComponent(link) {
         switch (link.route) {
             //RoutesEnum.about
@@ -55,7 +58,7 @@ class mainApp {
         try {
             const mainLinksElements = /**@type {NodeListOf <HTMLAnchorElement>} */ (document.querySelectorAll('a.main-links'))
             this.mainLinks = [...mainLinksElements].map(l => {
-                return new RouteModel(l.href.replace('#', ''), l)
+                return new PageModel(l.href.replace('#', ''), l)
             });
 
             const appmain =  /**@type {Element & {shadowRoot}} */(document.querySelector("app-main"));
