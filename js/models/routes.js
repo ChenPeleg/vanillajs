@@ -8,6 +8,8 @@
 //     closure = Symbol('closure')
 //     constructor() {
 
+import { EnumValidator } from "../Utils/Enum";
+
 //     }
 // }
 
@@ -17,3 +19,4 @@ export const RoutesEnum = {
     about: 1,
     closure: 2,
 };
+//EnumValidator(RoutesEnum)

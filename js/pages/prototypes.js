@@ -1,4 +1,4 @@
-class ProtoTypes {
+export class ProtoTypes {
     constructor() {
         this.isActiveRoute = false;
     }

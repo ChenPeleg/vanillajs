@@ -39,3 +39,15 @@ export const Enum = (enumObj, type = 'number') => {
 
 
 }
+
+
+export const EnumValidator = (testEnum) => {
+    const values = Object.values(testEnum);
+    if (new Set(values).size !== values.length) {
+        throw {
+            message: 'some of the enum values are the same!'
+        }
+    }
+
+    //return testEnum;
+}

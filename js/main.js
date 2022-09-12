@@ -6,20 +6,34 @@ import { RoutesEnum } from "./models/routes.js";
 
 class mainApp {
 
-    static CreatePages() {
-
-    }
-
     /**@type {PageModel []} */
-    mainLinks;
+    pages;
     constructor() {
-        /**@type {Record<keyof RoutesEnum,PageModel>} */
-        //  this.pages = {};
+
+        this.createPages();
+
+        this.createRouterLinks();
+        this.setElementPointers();
         window.addEventListener("popstate",
             this.popHandler
         );
-        this.createRouterLinks()
-        this.setElementPointers()
+    }
+    createPages() {
+        Object.keys(RoutesEnum).forEach(key => {
+            const page = new PageModel(RoutesEnum[key]);
+            switch (RoutesEnum[key]) {
+                case RoutesEnum.about:
+                    page.classPointer = new Abou();
+                    break;
+                case RoutesEnum.closure:
+                    page.classPointer = new Closure();
+                    break;
+                case RoutesEnum.protoype:
+                    page.classPointer = new ProtoTypes();
+                    break;
+            }
+            this.pages.push(page)
+        })
     }
     createRouterLinks() {
 
@@ -32,15 +46,14 @@ class mainApp {
             a.innerHTML = routeName;
             linkContainer.appendChild(a)
 
-            console.log(routeName)
         })
     }
 
     popHandler(ev) {
         const route = window.location.hash.replace("#", '');
 
-        this.mainLinks.forEach(link => {
-            const l = link.element;
+        this.pages.forEach(page => {
+            const l = page.element;
             if (l.href.includes(route)) {
                 l.classList.add('active');
             } else
@@ -49,17 +62,17 @@ class mainApp {
     }
     /** @type {(link : PageModel)=> void} */
     activateRouteComponent(link) {
-        switch (link.route) {
-            //RoutesEnum.about
+        // switch (link.page) {
+        //     //RoutesEnum.about
 
-        }
+        // }
     }
     setElementPointers() {
         try {
-            const mainLinksElements = /**@type {NodeListOf <HTMLAnchorElement>} */ (document.querySelectorAll('a.main-links'))
-            this.mainLinks = [...mainLinksElements].map(l => {
-                return new PageModel(l.href.replace('#', ''), l)
-            });
+            // const mainLinksElements = /**@type {NodeListOf <HTMLAnchorElement>} */ (document.querySelectorAll('a.main-links'))
+            // this.mainLinks = [...mainLinksElements].map(l => {
+            //     return new PageModel(l.href.replace('#', ''), l)
+            // });
 
             const appmain =  /**@type {Element & {shadowRoot}} */(document.querySelector("app-main"));
             const outlet = /**@type {Element} */(appmain.shadowRoot.querySelector('#router-outlet'));
