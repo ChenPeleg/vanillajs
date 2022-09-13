@@ -22,6 +22,7 @@ class mainApp {
         );
     }
     createPages() {
+        const root = /**@type {HTMLElement} */ (document.querySelector('#pages-outlet'));
         const pagesArr = [];
         Object.keys(RoutesEnum).forEach(key => {
             const page = new PageModel(RoutesEnum[key]);
@@ -33,7 +34,7 @@ class mainApp {
                     page.classPointer = new Closure();
                     break;
                 case RoutesEnum.protoype:
-                    page.classPointer = new ProtoTypes();
+                    page.classPointer = new ProtoTypes(root);
                     break;
             }
             pagesArr.push(page)

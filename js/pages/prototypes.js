@@ -1,8 +1,29 @@
+import { Utils } from "../Utils/utils.js";
+
 export class ProtoTypes {
-    constructor() {
+    /** @param  {HTMLElement} rootElement*/
+    constructor(rootElement) {
         this.isActiveRoute = false;
+        this.container = this.createContainer(rootElement)
+    }
+    #active = false;
+    set active(val) {
+        this.#active = val;
     }
 
+    get active() {
+        return this.#active;
+    }
+    /** @param  {HTMLElement} root*/
+    createContainer(root) {
+        const container = document.createElement('div');
+        container.id = this.generateRandId(Object.getPrototypeOf(this).constructor.name)
+        root.appendChild(container);
+        return container;
+    }
+    generateRandId(name) {
+        return name + '_' + Utils.random(10000);
+    }
     showChain(obj) {
         const getProtoChaninToArray = (o, arr = []) => {
             arr.push(o)
