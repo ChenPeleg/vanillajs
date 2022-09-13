@@ -14,6 +14,7 @@ export class ProtoTypes {
         this.isActiveRoute = false;
         this.container = this.createContainer(rootElement)
         globalThis.showChain = (...args) => this.showChain(...args);
+        this.renderChain()
     }
     #active = false;
     set active(val) {
@@ -30,6 +31,18 @@ export class ProtoTypes {
         container.innerHTML = Object.getPrototypeOf(this).constructor.name + ' ';
         root.appendChild(container);
         return container;
+    }
+    renderChain() {
+        const chainMemberContainer = document.createElement('div');
+        /**@type {import("../types/css-types.js").CSSObejct} */
+        Utils.styler(chainMemberContainer, {
+            height: '100px',
+            'background-color': 'red',
+            'width': '200px'
+        })
+        this.container.appendChild(chainMemberContainer)
+        //chainMemberContainer.setStyle = {}
+
     }
     generateRandId(name) {
         return name + '_' + Utils.random(10000);
