@@ -1,10 +1,19 @@
 import { Utils } from "../Utils/utils.js";
+/** 
+ * @typedef ProtoChainMember
+ * @prop {any} obj
+ * @prop {string} description
+ * @prop {number} level
+ * @prop {string} specialType
+  */
+
 
 export class ProtoTypes {
     /** @param  {HTMLElement} rootElement*/
     constructor(rootElement) {
         this.isActiveRoute = false;
         this.container = this.createContainer(rootElement)
+        globalThis.showChain = (...args) => this.showChain(...args);
     }
     #active = false;
     set active(val) {
@@ -17,7 +26,8 @@ export class ProtoTypes {
     /** @param  {HTMLElement} root*/
     createContainer(root) {
         const container = document.createElement('div');
-        container.id = this.generateRandId(Object.getPrototypeOf(this).constructor.name)
+        container.id = this.generateRandId(Object.getPrototypeOf(this).constructor.name);
+        container.innerHTML = Object.getPrototypeOf(this).constructor.name + ' ';
         root.appendChild(container);
         return container;
     }
@@ -56,13 +66,22 @@ export class ProtoTypes {
             }
 
         }
-        const protoArray = getProtoChaninToArray(obj, [])
-        protoArray.forEach((o, i) => {
-            const text = "Level: " + (protoArray.length - i - 1) + (getSpecialType(o) ? ` (${getSpecialType(o)})` : [o])
+        const protoArray = getProtoChaninToArray(obj, []);
+        /**@type {ProtoChainMember[]} */
+        const completeChain = protoArray.map((o, i) => {
+            return { obj: o, level: (protoArray.length - i - 1), description: [o], specialType: getSpecialType(o) }
+        });
+
+
+    }
+
+    consoleLogChain(completeChain) {
+        completeChain.forEach((o) => {
+            const text = "Level: " + o.level + " " + (o.specialType || o.description)
             console.log(text)
             console.dir(o)
 
-            protoArray.length - i > 1 ? console.log("    ↓    ") : null
+            o.level > 0 ? console.log("    ↓    ") : null
 
         })
     }
