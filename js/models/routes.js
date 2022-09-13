@@ -8,7 +8,7 @@
 //     closure = Symbol('closure')
 //     constructor() {
 
-import { EnumValidator } from "../Utils/Enum";
+import { EnumValidator } from "../Utils/Enum.js";
 
 //     }
 // }

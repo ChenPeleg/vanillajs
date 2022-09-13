@@ -9,19 +9,20 @@ import { ProtoTypes } from "./pages/prototypes.js";
 
 class mainApp {
 
-    /**@type {PageModel []} */
-    pages;
+
+
     constructor() {
-
-        this.createPages();
-
-        this.createRouterLinks();
+        //this.popHandler.bind(this);
+        /**@type {PageModel []} */
+        this.pages = this.createPages();
+        this.createRouterLinks(this.pages);
         this.setElementPointers();
         window.addEventListener("popstate",
-            this.popHandler
+            (ev) => this.popHandler(ev)
         );
     }
     createPages() {
+        const pagesArr = [];
         Object.keys(RoutesEnum).forEach(key => {
             const page = new PageModel(RoutesEnum[key]);
             switch (RoutesEnum[key]) {
@@ -35,26 +36,28 @@ class mainApp {
                     page.classPointer = new ProtoTypes();
                     break;
             }
-            this.pages.push(page)
+            pagesArr.push(page)
         })
+        return pagesArr;
     }
-    createRouterLinks() {
+    /**@type { (pages: PageModel[]) =>void }*/
+    createRouterLinks(pages) {
 
         const linkContainer =  /**@type {HTMLDivElement} */(document.querySelector('#the-link-container'));
 
-        Object.keys(RoutesEnum).forEach(routeName => {
+        pages.forEach(page => {
             const a = document.createElement('a');
             a.className = 'main-links';
-            a.href = '#' + routeName;
-            a.innerHTML = routeName;
-            linkContainer.appendChild(a)
-
+            a.href = '#' + page.name;
+            a.innerHTML = page.name;
+            linkContainer.appendChild(a);
+            page.element = a;
         })
     }
 
     popHandler(ev) {
         const route = window.location.hash.replace("#", '');
-
+        console.log(this.pages)
         this.pages.forEach(page => {
             const l = page.element;
             if (l.href.includes(route)) {
