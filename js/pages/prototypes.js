@@ -6,6 +6,7 @@ import { Utils } from "../Utils/utils.js";
  * @prop {string} description
  * @prop {number} level
  * @prop {string} specialType
+ * @prop {string} typeOf
   */
 
 
@@ -72,6 +73,7 @@ export class ProtoTypes {
             return proto ? getProtoChaninToArray(proto, arr) : arr.concat([proto])
         }
         const getSpecialType = (o) => {
+
             switch (o) {
                 case Array:
                     return "Array constructor";
@@ -81,6 +83,15 @@ export class ProtoTypes {
                     return "String constructor";
                 case String.prototype:
                     return "String.prototype";
+                case Number:
+                    return "Number constructor";
+                case Number.prototype:
+                    return "Number.prototype";
+                case Boolean:
+                    return "Boolean constructor";
+                case Boolean.prototype:
+                    return "Boolean.prototype";
+
                 case Object:
                     return "Object constructor";
                 case Object.prototype:
@@ -100,7 +111,7 @@ export class ProtoTypes {
         const protoArray = getProtoChaninToArray(obj, []);
         /**@type {ProtoChainMember[]} */
         const completeChain = protoArray.map((o, i) => {
-            return { obj: o, level: (protoArray.length - i - 1), description: [o], specialType: getSpecialType(o) }
+            return { obj: o, level: (protoArray.length - i - 1), description: [o], specialType: getSpecialType(o), typeOf: typeof o }
         });
         return completeChain;
 
@@ -109,7 +120,7 @@ export class ProtoTypes {
     /**@type {(completeChain : ProtoChainMember[])=> void} */
     consoleLogChain(completeChain) {
         completeChain.forEach((o) => {
-            const text = "Level: " + o.level + " " + (o.specialType || o.description)
+            const text = "Level: " + o.level + " " + (o.specialType || (o.description + " (" + o.typeOf + ")"))
             console.log(text)
             console.dir(o)
 
