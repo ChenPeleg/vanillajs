@@ -42,6 +42,7 @@ export class ProtoTypes {
     }
     renderOnChainElement(element) {
         const chainMemberContainer = document.createElement('div');
+        const chainMemeberArrow = document.createElement('div');
         /**@type {import("../types/css-types.js").CSSObejct} */
         Utils.styler(chainMemberContainer, {
             height: '100px',
@@ -49,11 +50,23 @@ export class ProtoTypes {
             'width': '200px',
             'border-radius': '4px',
             'box-shadow': '2px 2px 4px rgba(0,0,0,.5)',
+            'font-size': '22px',
+            "justify-content": 'center',
             ...BaseStyles.flexCol
         })
         const chainMemeberHeader = document.createElement('H4');
+        Utils.styler(chainMemeberHeader, { 'margin': '0px' });
+        const chainMemeberLevelHeader = document.createElement('H4');
+        Utils.styler(chainMemeberLevelHeader, { 'margin': '0px', color: 'green', "text-shadow": '2px 2px 1px rgba(0,0,0,1), -2px -2px 1px rgba(0,0,0,1),  -2px  2px 1px rgba(0,0,0,1), 2px -2px 1px rgba(0,0,0,1), 2px -2px 3px rgba(0,0,0,1)' });
+
+        Utils.styler(chainMemeberArrow, { "font-size": '40px', "font-weight": '700', "align-self": 'flex-end' })
+
+        chainMemeberLevelHeader.innerHTML = 'Level 1'
         chainMemeberHeader.innerHTML = 'String.Protoype'
+        chainMemeberArrow.innerHTML = '↓'
+        chainMemberContainer.append(chainMemeberLevelHeader)
         chainMemberContainer.append(chainMemeberHeader)
+        chainMemberContainer.append(chainMemeberArrow)
         return chainMemberContainer;
     }
     generateRandId(name) {
