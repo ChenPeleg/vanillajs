@@ -5,6 +5,9 @@ import { RoutesEnum } from "./models/routes.js";
 
 
 class mainApp {
+    static CreateRoutes() {
+
+    }
 
     /**@type {RouteModel []} */
     mainLinks;
