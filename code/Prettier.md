@@ -1,5 +1,7 @@
 ## Setup prettier for Javascript
 
+https://github.com/prettier/eslint-config-prettier
+
 ## configuring IDE
 
 ### Vscode
@@ -15,8 +17,11 @@ setting default formatter:
 {
 	"settings": {
 		"[javascript]": {
-			"editor.defaultFormatter": "esbenp.prettier-vscode"
+			"editor.defaultFormatter": "esbenp.prettier-vscode",
+            "editor.formatOnPaste": true,		// Default (format when you paste)
+            "editor.formatOnSave": true,// Default (format when you save)
 		}
+
 	}
 }
 ```
@@ -31,3 +36,7 @@ see [this](https://prettier.io/docs/en/webstorm.html) for more details.
 -   webstorm
 
 ###
+
+### Prettier config format
+
+Recomended to be in js, to allow comments.
