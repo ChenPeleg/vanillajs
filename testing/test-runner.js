@@ -1,9 +1,7 @@
 require('./testing.frame')
 
-const runner = (...args) => ({
+export const testRunner = (...args) => ({
     run() {
         console.log('running tests')
     },
 })
-
-runner().run()

@@ -3,7 +3,8 @@
     "node": "18"
   },
   "scripts": {
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "test" : "node ./test/index.js"
   },
   "dependencies": {
     "gh-pages": "^4.0.0"
