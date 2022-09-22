@@ -1,12 +1,3 @@
-/** Testing function
- * @params {string} descriptopn
- * @pramas {()=> void | never} test
- * @return void
- */
-function it(desctiption, test) {}
-function expect(value) {
-    return new Matcher(value)
-}
 class Matcher {
     constructor(value) {
         this.value = value
@@ -26,4 +17,4 @@ class Matcher {
     }
 }
 
-export const TestingFramwork = () => {}
+export default Matcher

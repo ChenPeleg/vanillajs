@@ -1,8 +1,5 @@
-// import { testRunner } from './test-runner'
+import { TestRunner } from './core/test-runner.js';
 
-// testRunner().run()
-export default {
-    run() {
-        console.log('run')
-    },
-}
+const tr = new TestRunner();
+tr.run();
+//it('abc', () => {})
