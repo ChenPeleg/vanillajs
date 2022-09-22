@@ -1,15 +1,16 @@
+  
+import { GlobalData } from './testing.frame.js';
 import Matcher from './testing.frame.matchers.js';
 import TestObject from './testing.frame.test.js';
 
-class GlobalBinder {
-    constructor() {}
-    tests = [];
-    configData = {};
-}
+ /**@type { {ref? : GlobalData}} globalDataRef*/
+const glob = { }
+ 
 
 export class TestFrameWorkGlobals {
-    constructor() {
-        this.tests = [];
+    /**@param { GlobalData} globalDataRef*/
+    constructor(globalDataRef) {
+        glob.ref = globalDataRef; 
     }
 
     /** Testing function
@@ -20,7 +21,8 @@ export class TestFrameWorkGlobals {
     it(desctiption, test) {
         const additionalData = {};
         const testObj = new TestObject(desctiption, test, additionalData);
-        this.tests.push(testObj);
+        glob.ref?.tests.push(testObj);
+      
     }
     describe(descriptopn, tests) {}
     expect(value) {
