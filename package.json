@@ -5,7 +5,7 @@
    "type": "module",
   "scripts": {
     "deploy": "gh-pages -d dist",
-    "test" : "node ./test/index.js"
+    "test" : "node ./testing/index.js"
   },
   "dependencies": {
     "gh-pages": "^4.0.0"

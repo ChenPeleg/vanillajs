@@ -4,9 +4,11 @@ export class TestRunner {
     testingFramework;
     constructor() {
         this.testingFramework = new TestingFramwork();
-        //  this.testingFramework.
+        this.testingFramework.initGlobals();
     }
-    run() {
-        console.log('running tests...');
+    async runTests() {
+        await console.log('*** running tests ***');
+        const t = await import('../sample.test.mjs');
+        console.log(this.testingFramework.testFrameWorkGlobals.tests);
     }
 }
