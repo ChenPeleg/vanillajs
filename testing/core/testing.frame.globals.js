@@ -1,4 +1,4 @@
-import { GlobalData } from './testing.frame.js';
+import { GlobalData } from './testing.frame.core.js';
 import Matcher from './testing.frame.matchers.js';
 import TestObject from './testing.frame.test-class.js';
 
