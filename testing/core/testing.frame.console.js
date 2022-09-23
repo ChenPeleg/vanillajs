@@ -30,7 +30,7 @@ const colors = {
     },
 };
 
-/**@typedef {{color? : keyof typeof colors.fg, background? : keyof typeof colors.bg  }} logOptions */
+/**@typedef {{color? : keyof typeof colors.fg, background? : keyof typeof colors.bg  } | keyof typeof colors.fg} logOptions */
 export class TestFrameWorkConsole {
     constructor() {}
     static log(...args) {
@@ -48,7 +48,12 @@ export class TestFrameWorkConsole {
     }
     /** @type {(text : string, options?: logOptions)=>string} */
 
-    static paint(text, options = undefined) {
+    static paint(text, argsOptions = undefined) {
+        let options =
+            typeof argsOptions === 'object'
+                ? { ...argsOptions }
+                : { color: argsOptions };
+
         const fg = options?.color ? colors.fg[options.color] : '';
         const bg = options?.background ? colors.bg[options.background] : '';
         const reset = colors.reset;
@@ -62,11 +67,11 @@ export class TestFrameWorkConsole {
     static async runAnimation() {
         const c = TestFrameWorkConsole;
         const wait = TestFrameWorkUtils.wait;
-        c.rewrite(c.paint('green', { color: 'green' }));
+        c.rewrite(c.paint('green', 'green'));
         await wait(400);
-        c.rewrite(c.paint('red', { color: 'red' }));
+        c.rewrite(c.paint('red', 'red'));
         await wait(400);
-        c.rewrite(c.paint('yellow', { color: 'yellow' }));
+        c.rewrite(c.paint('yellow', 'yellow'));
         await wait(400);
     }
 }
