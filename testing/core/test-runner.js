@@ -17,7 +17,6 @@ export class TestRunner {
                 console.log(e);
             }
         });
-
         // console.log(this.testingFramework.globalData);
     }
 }

@@ -1,8 +1,7 @@
-// @ts-nocheck
-
 it('just a sample test', () => {
     return true;
 });
 it('second a sample test', () => {
-    return true;
+    let g = 8;
+    expect(g).toBe(8);
 });

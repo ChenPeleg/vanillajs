@@ -1,6 +1,6 @@
 import { GlobalData } from './testing.frame.js';
 import Matcher from './testing.frame.matchers.js';
-import TestObject from './testing.frame.test.js';
+import TestObject from './testing.frame.test-class.js';
 
 /**@type { {ref? : GlobalData}} globalDataRef*/
 const glob = {};

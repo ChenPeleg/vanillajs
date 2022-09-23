@@ -1,6 +1,5 @@
 import { TestFrameWorkGlobals } from './testing.frame.globals.js';
-import TestObject from './testing.frame.test.js';
-
+import TestObject from './testing.frame.test-class.js';
 
 export class GlobalData {
     constructor() {}
@@ -12,13 +11,11 @@ export class GlobalData {
 class TestingFramwork {
     constructor() {
         this.globalData = new GlobalData();
-        this.testFrameWorkGlobals = new TestFrameWorkGlobals(this.globalData)  
-        
-       
+        this.testFrameWorkGlobals = new TestFrameWorkGlobals(this.globalData);
     }
     init() {
         globalThis.expect = this.testFrameWorkGlobals.expect;
-        globalThis.it = this.testFrameWorkGlobals.it; 
+        globalThis.it = this.testFrameWorkGlobals.it;
         globalThis.describe = this.testFrameWorkGlobals.describe;
     }
 }
