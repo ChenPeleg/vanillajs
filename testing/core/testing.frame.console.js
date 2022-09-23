@@ -1,3 +1,5 @@
+import { TestFrameWorkUtils } from './testing.frame.utils.js';
+
 const colors = {
     reset: '\x1b[0m',
     bright: '\x1b[1m',
@@ -35,17 +37,36 @@ export class TestFrameWorkConsole {
         console.log(...args);
     }
     static green(text) {
-        TestFrameWorkConsole.print(text);
+        TestFrameWorkConsole.print(text, { color: 'green' });
     }
     static red(text) {
         TestFrameWorkConsole.print(text, { color: 'red' });
     }
     /** @type {(text : string, options?: logOptions)=>void} */
     static print(text, options = undefined) {
+        console.log(TestFrameWorkConsole.paint(text, options));
+    }
+    /** @type {(text : string, options?: logOptions)=>string} */
+
+    static paint(text, options = undefined) {
         const fg = options?.color ? colors.fg[options.color] : '';
         const bg = options?.background ? colors.bg[options.background] : '';
         const reset = colors.reset;
-        console.log(`${fg}${bg}${text}${reset}`);
+        return `${fg}${bg}${text}${reset}`;
     }
-    static runAnimation() {}
+    static rewrite(text) {
+        process.stdout.clearLine(0);
+        process.stdout.cursorTo(0);
+        process.stdout.write(text);
+    }
+    static async runAnimation() {
+        const c = TestFrameWorkConsole;
+        const wait = TestFrameWorkUtils.wait;
+        c.rewrite(c.paint('green', { color: 'green' }));
+        await wait(400);
+        c.rewrite(c.paint('red', { color: 'red' }));
+        await wait(400);
+        c.rewrite(c.paint('yellow', { color: 'yellow' }));
+        await wait(400);
+    }
 }

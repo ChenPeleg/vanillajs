@@ -20,7 +20,8 @@ export class TestRunner {
                 console.log(e);
             }
         });
-        this.log.red('abc');
+        //this.log.red('abc');
+        this.log.runAnimation();
         // console.log(this.testingFramework.globalData);
     }
 }
