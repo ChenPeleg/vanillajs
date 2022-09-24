@@ -1,6 +1,7 @@
 import { TestFrameWorkConsole } from './testing.frame.console.js';
 import TestingFramwork from './testing.frame.core.js';
-
+import * as fs from 'fs';
+import * as path from 'path';
 export class TestRunner {
     testingFramework;
     constructor() {
@@ -9,8 +10,34 @@ export class TestRunner {
         this.log = TestFrameWorkConsole;
         this.testingFramework.init();
     }
+    static async searchTestFiles(fileNameMatcher = ['.test.js', '.spec.js']) {
+        const BaseDirName = path.resolve('./');
+        let breaks = 0;
+        const recursiveGetAllTestFiles = (dir, allFiles) => {
+            if (breaks++ > 100) {
+                return;
+            }
+            const dirCont = fs.readdirSync(dir);
+            const testFiles = dirCont.forEach((elm) => {
+                const fullFileName = path.join(dir, elm);
+                const stat = fs.lstatSync(fullFileName);
+                if (stat.isDirectory()) {
+                    recursiveGetAllTestFiles(fullFileName, allFiles);
+                } else if (elm.match(/.*\.(test.js|spec.js)/gi)) {
+                    console.log('-- found: ', fullFileName);
+                    allFiles.concat(testFiles);
+                }
+            });
+            return allFiles;
+        };
+        recursiveGetAllTestFiles(BaseDirName, []);
+
+        // return testFiles;
+    }
     async runTests() {
-        await console.log('*** running tests ***');
+        await console.log('Running tests');
+        const testFiles = await TestRunner.searchTestFiles();
+        console.log(testFiles);
         await import('../sample.test.mjs');
         this.testingFramework.globalData.tests.forEach((test) => {
             //   console.log(test.descriptopn);
