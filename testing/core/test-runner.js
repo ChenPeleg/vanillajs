@@ -10,29 +10,34 @@ export class TestRunner {
         this.log = TestFrameWorkConsole;
         this.testingFramework.init();
     }
-    static async searchTestFiles(fileNameMatcher = ['.test.js', '.spec.js']) {
+    static async searchTestFiles(
+        fileNameMatcher = ['.test.js', '.spec.js'],
+        ignoreLibs = ['.git', 'node_modules']
+    ) {
         const BaseDirName = path.resolve('./');
         let breaks = 0;
         const recursiveGetAllTestFiles = (dir, allFiles) => {
-            if (breaks++ > 100) {
+            if (breaks++ > 10000) {
                 return;
             }
             const dirCont = fs.readdirSync(dir);
-            const testFiles = dirCont.forEach((elm) => {
+            dirCont.forEach((elm) => {
+                if (ignoreLibs.some((name) => elm.includes(name))) {
+                    return;
+                }
                 const fullFileName = path.join(dir, elm);
                 const stat = fs.lstatSync(fullFileName);
-                if (stat.isDirectory()) {
+                console.log(fullFileName);
+                if (stat.isDirectory() && fullFileName) {
                     recursiveGetAllTestFiles(fullFileName, allFiles);
-                } else if (elm.match(/.*\.(test.js|spec.js)/gi)) {
+                } else if (elm.match(/.*\.(test.m?js|spec.m?js)/gi)) {
                     console.log('-- found: ', fullFileName);
-                    allFiles.concat(testFiles);
+                    allFiles.push(fullFileName);
                 }
             });
             return allFiles;
         };
-        recursiveGetAllTestFiles(BaseDirName, []);
-
-        // return testFiles;
+        return recursiveGetAllTestFiles(BaseDirName, []);
     }
     async runTests() {
         await console.log('Running tests');
