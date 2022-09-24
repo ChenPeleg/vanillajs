@@ -31,6 +31,7 @@ const colors = {
 };
 
 /**@typedef {{color? : keyof typeof colors.fg, background? : keyof typeof colors.bg  } | keyof typeof colors.fg} logOptions */
+
 export class TestFrameWorkConsole {
     constructor() {}
     static log(...args) {
@@ -59,6 +60,15 @@ export class TestFrameWorkConsole {
         const reset = colors.reset;
         return `${fg}${bg}${text}${reset}`;
     }
+    static statusBar(len, pos, options = null) {
+        if (pos === 0) {
+            process.stdout.write('▒'.repeat(len));
+            process.stdout.cursorTo(0);
+            return;
+        }
+        process.stdout.cursorTo(pos - 1);
+        process.stdout.write('▓');
+    }
     static rewrite(text) {
         process.stdout.clearLine(0);
         process.stdout.cursorTo(0);
@@ -67,11 +77,10 @@ export class TestFrameWorkConsole {
     static async runAnimation() {
         const c = TestFrameWorkConsole;
         const wait = TestFrameWorkUtils.wait;
-        c.rewrite(c.paint('green', 'green'));
-        await wait(400);
-        c.rewrite(c.paint('red', 'red'));
-        await wait(400);
-        c.rewrite(c.paint('yellow', 'yellow'));
-        await wait(400);
+        const cubes = 40;
+        for (let i = 0; i <= cubes; i++) {
+            c.statusBar(cubes, i);
+            await wait(Math.random() * 100 > 90 ? 150 : 20);
+        }
     }
 }
