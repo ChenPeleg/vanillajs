@@ -117,7 +117,10 @@ export class TestRunner {
             )
         );
         if (failed.length) {
-            process.exit(1);
+            //  process.exit(1);
+            throw new Error(
+                'npm ERR! Test failed.  See above for more details.'
+            );
         }
     }
 }
