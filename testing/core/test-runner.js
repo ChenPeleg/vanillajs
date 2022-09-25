@@ -116,5 +116,8 @@ export class TestRunner {
                 { background: 'BGblack' }
             )
         );
+        if (failed.length) {
+            process.exit(1);
+        }
     }
 }
