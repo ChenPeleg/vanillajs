@@ -2,7 +2,7 @@ import { TestFrameWorkGlobals } from './testing.frame.globals.js';
 import TestEvent from './testing.frame.test-event.js';
 
 export class GlobalData {
-    constructor() {}
+    constructor() { }
     /**@type {TestEvent[]} */
     tests = [];
     configData = {};
