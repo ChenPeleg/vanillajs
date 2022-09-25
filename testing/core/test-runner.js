@@ -2,6 +2,12 @@ import { TestFrameWorkConsole } from './testing.frame.console.js';
 import TestingFramwork from './testing.frame.core.js';
 import * as fs from 'fs';
 import * as path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
 export class TestRunner {
     testingFramework;
     constructor() {
@@ -27,11 +33,9 @@ export class TestRunner {
                 }
                 const fullFileName = path.join(dir, elm);
                 const stat = fs.lstatSync(fullFileName);
-                console.log(fullFileName);
                 if (stat.isDirectory() && fullFileName) {
                     recursiveGetAllTestFiles(fullFileName, allFiles);
                 } else if (elm.match(/.*\.(test.m?js|spec.m?js)/gi)) {
-                    console.log('-- found: ', fullFileName);
                     allFiles.push(fullFileName);
                 }
             });
@@ -42,18 +46,19 @@ export class TestRunner {
     async runTests() {
         await console.log('Running tests');
         const testFiles = await TestRunner.searchTestFiles();
-        console.log(testFiles);
-        await import('../sample.test.mjs');
+        //testFiles.map ()
+        testFiles.forEach(async (element) => {
+            await import(path.relative(__dirname, element));
+        });
         this.testingFramework.globalData.tests.forEach((test) => {
-            //   console.log(test.descriptopn);
+            console.log(test.descriptopn);
             try {
                 test.test();
             } catch (e) {
                 console.log(e);
             }
         });
-        //this.log.red('abc');
+
         this.log.runAnimation();
-        // console.log(this.testingFramework.globalData);
     }
 }
