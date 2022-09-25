@@ -1,5 +1,17 @@
 import { TestFrameWorkUtils } from './testing.frame.utils.js';
 
+process.stdout.cursorTo = process.stdout.cursorTo || (() => {});
+process.stdout.write =
+    process.stdout.write ||
+    ((t) => {
+        t?.length > 1 ? console.log('') : null;
+    });
+process.stdout.clearLine =
+    process.stdout.clearLine ||
+    (() => {
+        console.log('');
+    });
+
 const colors = {
     reset: '\x1b[0m',
     bright: '\x1b[1m',
