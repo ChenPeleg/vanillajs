@@ -4,6 +4,6 @@ describe('my first tests', () => {
     });
     it('second a sample test', () => {
         let g = 8;
-        expect(g).toBe(8);
+        expect(g).toBe(9);
     });
 });

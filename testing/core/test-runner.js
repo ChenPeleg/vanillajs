@@ -66,6 +66,8 @@ export class TestRunner {
             );
         }
         const descriptions = [];
+        const passed = [];
+        const failed = [];
         this.testingFramework.globalData.tests.forEach((test) => {
             const indentation = ' '.repeat(descriptions.length * 4);
 
@@ -73,20 +75,46 @@ export class TestRunner {
                 case TestEventTypes.BLOCKSTART:
                     console.log(indentation + test.descriptopn);
                     descriptions.push(test.descriptopn);
-
                     return;
                 case TestEventTypes.BLOCKEND:
                     descriptions.pop();
                     return;
                 case TestEventTypes.TEST:
                     console.log(indentation + test.descriptopn);
-                    return;
             }
             try {
                 test.test();
             } catch (e) {
                 console.log(indentation + e);
+                failed.push(test.descriptopn + ' ' + e);
+                return;
             }
+            passed.push(test.descriptopn);
         });
+        if (failed.length) {
+            console.log(
+                TestFrameWorkConsole.paint(
+                    `${failed.length} Tests ${TestFrameWorkConsole.paint(
+                        ' FAILED ',
+                        {
+                            color: 'white',
+                            background: 'BGred',
+                        }
+                    )}`
+                )
+            );
+        }
+        console.log(
+            TestFrameWorkConsole.paint(
+                `${passed.length} Tests ${TestFrameWorkConsole.paint(
+                    ' PASSED ',
+                    {
+                        color: 'white',
+                        background: 'BGgreen',
+                    }
+                )}`,
+                { background: 'BGblack' }
+            )
+        );
     }
 }
