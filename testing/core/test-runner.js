@@ -46,10 +46,13 @@ export class TestRunner {
     async runTests() {
         await console.log('Running tests');
         const testFiles = await TestRunner.searchTestFiles();
-        //testFiles.map ()
-        testFiles.forEach(async (element) => {
-            await import(path.relative(__dirname, element));
-        });
+        // await import('../sample.test.mjs');
+        for (const fileName of testFiles) {
+            await import(
+                path.relative(__dirname, fileName).replace(/\\/g, '/')
+            );
+        }
+
         this.testingFramework.globalData.tests.forEach((test) => {
             console.log(test.descriptopn);
             try {
@@ -59,6 +62,6 @@ export class TestRunner {
             }
         });
 
-        this.log.runAnimation();
+        //   this.log.runAnimation();
     }
 }

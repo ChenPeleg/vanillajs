@@ -78,9 +78,13 @@ export class TestFrameWorkConsole {
         const c = TestFrameWorkConsole;
         const wait = TestFrameWorkUtils.wait;
         const cubes = 40;
+        const maxMsToPassOne = 50; // 150;
+        const minMSTopassOne = 1;
         for (let i = 0; i <= cubes; i++) {
             c.statusBar(cubes, i);
-            await wait(Math.random() * 100 > 90 ? 150 : 20);
+            await wait(
+                Math.random() * 100 > 90 ? maxMsToPassOne : minMSTopassOne
+            );
         }
     }
 }
