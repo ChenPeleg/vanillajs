@@ -34,6 +34,7 @@ const colors = {
 
 export class TestFrameWorkConsole {
     constructor() {}
+    animationOn = false;
     static log(...args) {
         console.log(...args);
     }
@@ -86,5 +87,35 @@ export class TestFrameWorkConsole {
                 Math.random() * 100 > 90 ? maxMsToPassOne : minMSTopassOne
             );
         }
+    }
+    circleAnimation(action = 'AUTO', baseText = '', speed = 50) {
+        if (this.animationOn && action === 'ON') {
+            return;
+        }
+        this.animationOn =
+            action === 'ON' || (action === 'AUTO' && !this.animationOn)
+                ? true
+                : false;
+
+        if (!this.animationOn) {
+            process.stdout.cursorTo(0);
+            process.stdout.write('              ');
+
+            return;
+        }
+
+        const lines = ['-', '/', '|', '\\'];
+        let state = 0;
+        let cursor = baseText.length + 1;
+        const animate = () => {
+            if (!this.animationOn) {
+                return;
+            }
+            process.stdout.cursorTo(cursor);
+            process.stdout.write(lines[state]);
+            setTimeout(() => {
+                animate();
+            }, speed);
+        };
     }
 }
