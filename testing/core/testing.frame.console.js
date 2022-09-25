@@ -8,6 +8,7 @@ const colors = {
     blink: '\x1b[5m',
     reverse: '\x1b[7m',
     hidden: '\x1b[8m',
+    hideCursor: '\u001B[?25l',
     fg: {
         black: '\x1b[30m',
         red: '\x1b[31m',
@@ -35,6 +36,7 @@ const colors = {
 export class TestFrameWorkConsole {
     constructor() {}
     animationOn = false;
+    animationText = '';
     static log(...args) {
         console.log(...args);
     }
@@ -88,7 +90,7 @@ export class TestFrameWorkConsole {
             );
         }
     }
-    circleAnimation(action = 'AUTO', baseText = '', speed = 50) {
+    circleAnimation(action = 'AUTO', baseText = '', speed = 80) {
         if (this.animationOn && action === 'ON') {
             return;
         }
@@ -98,24 +100,37 @@ export class TestFrameWorkConsole {
                 : false;
 
         if (!this.animationOn) {
+            this.animationText = baseText || this.animationText;
+            process.stdout.write(colors.hideCursor + ' ');
             process.stdout.cursorTo(0);
-            process.stdout.write('              ');
+            process.stdout.write(
+                this.animationText + TestFrameWorkConsole.paint(' ✔', 'green')
+            );
+            console.log();
+            this.animationText = '';
 
             return;
         }
-
+        this.animationText = baseText;
         const lines = ['-', '/', '|', '\\'];
         let state = 0;
-        let cursor = baseText.length + 1;
+        let cursor = baseText.length + 2;
+        let saftey = 0;
+
         const animate = () => {
-            if (!this.animationOn) {
+            if (!this.animationOn || saftey++ > 100) {
                 return;
             }
+            state++;
+            state = state < lines.length ? state : 0;
+            process.stdout.write(colors.hideCursor + lines[state]);
             process.stdout.cursorTo(cursor);
-            process.stdout.write(lines[state]);
             setTimeout(() => {
                 animate();
             }, speed);
         };
+        process.stdout.write(colors.hideCursor + baseText);
+        process.stdout.cursorTo(cursor);
+        animate();
     }
 }

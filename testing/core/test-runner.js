@@ -52,13 +52,14 @@ export class TestRunner {
     async runTests() {
         console.log('Running tests');
         this.print.circleAnimation('ON', 'Searching For Files');
-        //this.print
         const testFiles = await TestRunner.searchTestFiles();
-        await TestFrameWorkUtils.wait(1000);
-        this.print.circleAnimation('OFF');
+        await TestFrameWorkUtils.wait(500);
+        this.print.circleAnimation(
+            'OFF',
+            `Found ${testFiles.length} test files`
+        );
         console.log(' ');
 
-        this.print.circleAnimation('ON', 'Searching For Files');
         for (const fileName of testFiles) {
             await import(
                 path.relative(__dirname, fileName).replace(/\\/g, '/')
@@ -87,7 +88,5 @@ export class TestRunner {
                 console.log(indentation + e);
             }
         });
-
-        //   this.log.runAnimation();
     }
 }
