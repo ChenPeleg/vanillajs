@@ -1,3 +1,7 @@
-{"compilerOptions": {"allowJs": true, "declaration": true, 
-"outDir": "./build",   "typeRoots": [ "./typings" ],
-        "outFile": "./built/combined.js" }}
+{
+    "compilerOptions": {
+        "allowJs": true,
+        "typeRoots": ["./typings"],
+        "outFile": "./justANameToMakeTSHappy.js"
+    }
+}
