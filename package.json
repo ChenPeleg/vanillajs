@@ -1,11 +1,13 @@
 {
+  "name" : "vanilla-js",
   "engines": {
     "node": "18"
   },
    "type": "module",
   "scripts": {
     "deploy": "gh-pages -d dist",
-    "test" : "node ./testing/index.js"
+    "test" : "node ./testing/index.js",
+     "build" : "node ./bundler/bundler.js"
   },
   "dependencies": {
     "gh-pages": "^4.0.0"

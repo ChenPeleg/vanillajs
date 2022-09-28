@@ -105,6 +105,7 @@ export class TestRunner {
             );
         }
         console.log(
+            '\n',
             TestFrameWorkConsole.paint(
                 `${passed.length} Tests ${TestFrameWorkConsole.paint(
                     ' PASSED ',
