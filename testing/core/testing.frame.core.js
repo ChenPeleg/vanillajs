@@ -2,13 +2,13 @@ import { TestFrameWorkGlobals } from './testing.frame.globals.js';
 import TestEvent from './testing.frame.test-event.js';
 
 export class GlobalData {
-    constructor() { }
+    constructor() {}
     /**@type {TestEvent[]} */
     tests = [];
     configData = {};
 }
 
-class TestingFramwork {
+class TestingFramework {
     constructor() {
         this.globalData = new GlobalData();
         this.testFrameWorkGlobals = new TestFrameWorkGlobals(this.globalData);
@@ -20,4 +20,4 @@ class TestingFramwork {
     }
 }
 
-export default TestingFramwork;
+export default TestingFramework;

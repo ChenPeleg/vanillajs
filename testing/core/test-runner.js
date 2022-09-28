@@ -1,5 +1,5 @@
 import { TestFrameWorkConsole } from './testing.frame.console.js';
-import TestingFramwork from './testing.frame.core.js';
+import TestingFramework from './testing.frame.core.js';
 import * as fs from 'fs';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
@@ -14,7 +14,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 export class TestRunner {
     testingFramework;
     constructor() {
-        this.testingFramework = new TestingFramwork();
+        this.testingFramework = new TestingFramework();
         this.print = new TestFrameWorkConsole();
         this.log = TestFrameWorkConsole;
         this.testingFramework.init();
@@ -25,7 +25,7 @@ export class TestRunner {
     ) {
         const BaseDirName = path.resolve('./');
         let breaks = 0;
-        let foldersScaned = 0;
+
         const recursiveGetAllTestFiles = (dir, allFiles) => {
             if (breaks++ > 10000) {
                 return;

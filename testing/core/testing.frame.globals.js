@@ -12,31 +12,31 @@ export class TestFrameWorkGlobals {
     }
 
     /** Testing function
-     * @params {string} descriptopn
-     * @pramas {()=> void | never} test
+     * @params {string} description
+     * @prams {()=> void | never} test
      * @return void
      */
-    it(desctiption, test) {
+    it(description, test) {
         const additionalData = {};
         const testObj = new TestEvent(
-            desctiption,
+            description,
             test,
             TestEventTypes.TEST,
             additionalData
         );
         glob.ref?.tests.push(testObj);
     }
-    describe(desctiption, tests) {
+    describe(description, tests) {
         const additionalData = {};
         const BLOCKSTART = new TestEvent(
-            desctiption,
+            description,
             null,
             TestEventTypes.BLOCKSTART
         );
         glob.ref?.tests.push(BLOCKSTART);
         tests();
         const BLOCKEND = new TestEvent(
-            desctiption,
+            description,
             null,
             TestEventTypes.BLOCKEND
         );
