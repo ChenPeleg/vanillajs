@@ -1,6 +1,7 @@
 import { fileURLToPath } from 'url';
 import * as path from 'path';
 import * as fs from 'fs';
+import { JsFile } from './js-file-class.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const BaseDirName = path.resolve('./');
@@ -16,7 +17,6 @@ export const buildTree = (entryPoint = './entry.js') => {
     const thisProjectPath = path.resolve('./');
     const thisScriptPath = __dirname;
     const entryPointPath = path.resolve(thisScriptPath, entryPoint);
-    console.log(entryPointPath);
-    const entryContent = fs.readFileSync(entryPointPath);
-    console.log(entryContent);
+    const file = new JsFile(entryPointPath);
+    console.log(file.getImports());
 };
