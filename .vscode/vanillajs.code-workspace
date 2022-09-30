@@ -7,10 +7,10 @@
     "settings": {
         "editor.formatOnPaste": true,
         "editor.formatOnSave": true,
-        "javascript.format.enable": true,
-        "javascript.validate.enable": true,
-        "[javascript]": {
-            "editor.defaultFormatter": "esbenp.prettier-vscode"
-        }
+   
+
+        // "[javascript]": {
+        //     "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+        // }
     }
 }

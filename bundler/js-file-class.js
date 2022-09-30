@@ -1,4 +1,5 @@
 import * as fs from 'fs';
+import { RegexTools } from './regexTools.js';
 
 export class JsFile {
     constructor(filePath) {
@@ -7,6 +8,9 @@ export class JsFile {
     }
     getImports() {
         return JsFile.getImportLines(this.rawText);
+    }
+    static imports2(txt) {
+        const importLines = RegexTools.getImportRegex(txt);
     }
     static getImportLines(txt) {
         return txt.match(/\bimport[^;\n]*(;|\n)/g);
