@@ -1,4 +1,3 @@
-import { match } from 'assert';
 import * as fs from 'fs';
 
 export class JsFile {

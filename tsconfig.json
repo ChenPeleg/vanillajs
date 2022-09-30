@@ -2,6 +2,7 @@
     "compilerOptions": {
         "allowJs": true,
         "typeRoots": ["./typings"],
-        "outFile": "./justANameToMakeTSHappy.js"
+        "outFile": "./justANameToMakeTSHappy.js",
+        "module": "System"
     }
 }
