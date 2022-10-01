@@ -6,12 +6,12 @@ export const TestEventTypes = {
 
 class TestEvent {
     constructor(
-        descriptopn,
+        description,
         test,
         type = TestEventTypes.TEST,
         additionalData = {}
     ) {
-        this.descriptopn = descriptopn;
+        this.description = description;
         this.type = type;
         this.test = test;
         this.additionalData = additionalData;

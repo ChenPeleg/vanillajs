@@ -68,28 +68,32 @@ export class TestRunner {
         const descriptions = [];
         const passed = [];
         const failed = [];
+        const skiped = [];
         this.testingFramework.globalData.tests.forEach((test) => {
             const indentation = ' '.repeat(descriptions.length * 4);
 
             switch (test.type) {
                 case TestEventTypes.BLOCKSTART:
-                    console.log(indentation + test.descriptopn);
-                    descriptions.push(test.descriptopn);
+                    console.log(indentation + test.description);
+                    descriptions.push(test.description);
                     return;
                 case TestEventTypes.BLOCKEND:
                     descriptions.pop();
                     return;
                 case TestEventTypes.TEST:
-                    console.log(indentation + test.descriptopn);
+                    if (filter && !test.description.includes(filter)) {
+                        skiped.push(test.description);
+                    }
+                    console.log(indentation + test.description);
             }
             try {
                 test.test();
             } catch (e) {
                 console.log(indentation + e);
-                failed.push(test.descriptopn + ' ' + e);
+                failed.push(test.description + ' ' + e);
                 return;
             }
-            passed.push(test.descriptopn);
+            passed.push(test.description);
         });
         if (failed.length) {
             console.log(
