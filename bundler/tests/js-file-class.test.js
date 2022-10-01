@@ -28,4 +28,11 @@ import { RegexTools } from './regexTools.js'; this is the rest of the file `;
             JsFile.deleteImportLines(text1, lineImports).replace('\n', '')
         ).toBe(' this is the rest of the file ');
     });
+    it('finds the export lines in the file last', () => {
+        const text1 = `export const fun = () => {return 4}; export class Bricks {} `;
+        const lineImports = JsFile.getExportLines(text1);
+        expect(
+            JsFile.deleteImportLines(text1, lineImports).replace('\n', '')
+        ).toBe(' this is the rest of the file ');
+    });
 });

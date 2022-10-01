@@ -74,7 +74,11 @@ export class TestRunner {
 
             switch (test.type) {
                 case TestEventTypes.BLOCKSTART:
-                    console.log(indentation + test.description);
+                    if (filter && !test.description.includes(filter)) {
+                    } else {
+                        console.log(indentation + test.description);
+                    }
+
                     descriptions.push(test.description);
                     return;
                 case TestEventTypes.BLOCKEND:
@@ -83,6 +87,7 @@ export class TestRunner {
                 case TestEventTypes.TEST:
                     if (filter && !test.description.includes(filter)) {
                         skipped.push(test.description);
+                        return;
                     }
                     console.log(indentation + test.description);
             }
@@ -97,6 +102,7 @@ export class TestRunner {
         });
         if (skipped.length) {
             console.log(
+                '\n',
                 TestFrameWorkConsole.paint(
                     `${skipped.length} Tests ${TestFrameWorkConsole.paint(
                         ' SKIPPED ',
