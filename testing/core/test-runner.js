@@ -68,7 +68,7 @@ export class TestRunner {
         const descriptions = [];
         const passed = [];
         const failed = [];
-        const skiped = [];
+        const skipped = [];
         this.testingFramework.globalData.tests.forEach((test) => {
             const indentation = ' '.repeat(descriptions.length * 4);
 
@@ -82,7 +82,7 @@ export class TestRunner {
                     return;
                 case TestEventTypes.TEST:
                     if (filter && !test.description.includes(filter)) {
-                        skiped.push(test.description);
+                        skipped.push(test.description);
                     }
                     console.log(indentation + test.description);
             }
@@ -95,6 +95,19 @@ export class TestRunner {
             }
             passed.push(test.description);
         });
+        if (skipped.length) {
+            console.log(
+                TestFrameWorkConsole.paint(
+                    `${skipped.length} Tests ${TestFrameWorkConsole.paint(
+                        ' SKIPPED ',
+                        {
+                            color: 'white',
+                            background: 'BGyellow',
+                        }
+                    )}`
+                )
+            );
+        }
         if (failed.length) {
             console.log(
                 TestFrameWorkConsole.paint(
