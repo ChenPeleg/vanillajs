@@ -1,6 +1,8 @@
 const RegexTools = {
     ImportRegex:
         /import(?:(?:(?:[ \n\t]+([^ *\n\t\{\},]+)[ \n\t]*(?:,|[ \n\t]+))?([ \n\t]*\{(?:[ \n\t]*[^ \n\t"'\{\}]+[ \n\t]*,?)+\})?[ \n\t]*)|[ \n\t]*\*[ \n\t]*as[ \n\t]+([^ \n\t\{\}]+)[ \n\t]+)from[ \n\t]*(?:['"])([^'"\n]+)(['"])(\n|\t|;)/g,
+    ExportRegex: /\bexport\b\s(const|let|function|var|default)\s/g,
+
     ImportsNamesIndex: 2,
     ImportRegexURLPathIndex: 4,
     /**@type {(txt: sting)=>{ importedNames: string, importPath: string, importLine: string} []} */
@@ -19,6 +21,9 @@ const RegexTools = {
             const allOfTheLine = lineGroupsMatch[0][0];
             return { importedNames, importPath, importLine: allOfTheLine };
         });
+    },
+    getExportLines(txt) {
+        return Array.from(txt.matchAll(this.ExportRegex)).filter((ex) => ex);
     },
 };
 

@@ -49,7 +49,7 @@ export class TestRunner {
         };
         return recursiveGetAllTestFiles(BaseDirName, []);
     }
-    async runTests() {
+    async runTests({ ignore, testfiles, filter }) {
         console.log('Running tests');
         this.print.circleAnimation('ON', 'Searching For Files');
         const testFiles = await TestRunner.searchTestFiles();

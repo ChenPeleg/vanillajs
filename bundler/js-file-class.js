@@ -30,4 +30,8 @@ export class JsFile {
 
         return textWithoutImports;
     }
+    static getExportLines(txt) {
+        const exportLines = RegexTools.getExportLines(txt);
+        return exportLines;
+    }
 }
