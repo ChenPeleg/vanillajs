@@ -1,7 +1,7 @@
 const RegexTools = {
     ImportRegex:
         /import(?:(?:(?:[ \n\t]+([^ *\n\t\{\},]+)[ \n\t]*(?:,|[ \n\t]+))?([ \n\t]*\{(?:[ \n\t]*[^ \n\t"'\{\}]+[ \n\t]*,?)+\})?[ \n\t]*)|[ \n\t]*\*[ \n\t]*as[ \n\t]+([^ \n\t\{\}]+)[ \n\t]+)from[ \n\t]*(?:['"])([^'"\n]+)(['"])(\n|\t|;)/g,
-    ExportRegex: /\bexport\b\s(const|let|function|var|default)\s/g,
+    ExportRegex: /export\s(?:const|let|function|var|default)\s[^)}={;]/g,
 
     ImportsNamesIndex: 2,
     ImportRegexURLPathIndex: 4,
