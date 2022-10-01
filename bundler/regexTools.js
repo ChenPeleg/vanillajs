@@ -1,8 +1,9 @@
 const RegexTools = {
     ImportRegex:
-        /import(?:(?:(?:[ \n\t]+([^ *\n\t\{\},]+)[ \n\t]*(?:,|[ \n\t]+))?([ \n\t]*\{(?:[ \n\t]*[^ \n\t"'\{\}]+[ \n\t]*,?)+\})?[ \n\t]*)|[ \n\t]*\*[ \n\t]*as[ \n\t]+([^ \n\t\{\}]+)[ \n\t]+)from[ \n\t]*(?:['"])([^'"\n]+)(['"])/g,
+        /import(?:(?:(?:[ \n\t]+([^ *\n\t\{\},]+)[ \n\t]*(?:,|[ \n\t]+))?([ \n\t]*\{(?:[ \n\t]*[^ \n\t"'\{\}]+[ \n\t]*,?)+\})?[ \n\t]*)|[ \n\t]*\*[ \n\t]*as[ \n\t]+([^ \n\t\{\}]+)[ \n\t]+)from[ \n\t]*(?:['"])([^'"\n]+)(['"])(\n|\t|;)/g,
     ImportsNamesIndex: 2,
     ImportRegexURLPathIndex: 4,
+    /**@type {(txt: sting)=>{ importedNames: string, importPath: string, importLine: string} []} */
     getImportLines(txt) {
         const importLines = txt
             .split('import')
@@ -15,7 +16,8 @@ const RegexTools = {
             );
             const importedNames = lineGroupsMatch[0][this.ImportsNamesIndex];
             const importPath = lineGroupsMatch[0][this.ImportRegexURLPathIndex];
-            return { importedNames, importPath, importLine };
+            const allOfTheLine = lineGroupsMatch[0][0];
+            return { importedNames, importPath, importLine: allOfTheLine };
         });
     },
 };

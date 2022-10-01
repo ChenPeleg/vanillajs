@@ -10,7 +10,7 @@ import { RegexTools } from './regexTools.js';`;
                 {
                     importedNames: undefined,
                     importPath: 'fs',
-                    importLine: "import * as fs from 'fs';\n",
+                    importLine: "import * as fs from 'fs';",
                 },
                 {
                     importedNames: ' { RegexTools }',
@@ -20,5 +20,12 @@ import { RegexTools } from './regexTools.js';`;
             ])
         );
     });
-    it('gets ', () => {});
+    it('deletes import lines from the text of the file ', () => {
+        const text1 = `import * as fs from 'fs';
+import { RegexTools } from './regexTools.js'; this is the rest of the file `;
+        const lineImports = JsFile.getImportLinesWithData(text1);
+        expect(
+            JsFile.deleteImportLines(text1, lineImports).replace('\n', '')
+        ).toBe(' this is the rest of the file ');
+    });
 });

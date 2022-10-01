@@ -18,5 +18,4 @@ export const buildTree = (entryPoint = './entry.js') => {
     const thisScriptPath = __dirname;
     const entryPointPath = path.resolve(thisScriptPath, entryPoint);
     const file = new JsFile(entryPointPath);
-    console.log(file.getImports());
 };
