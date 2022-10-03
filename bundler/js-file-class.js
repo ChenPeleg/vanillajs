@@ -3,6 +3,8 @@ import { RegexTools } from './regexTools.js';
 
 /**@typedef {{ importedNames: string, importPath: string, importLine: string}} ImportLine  */
 
+/**@typedef {{  exportedExpression: string,   exportType: string, exportValue : string, exportLine: string}} ExportLine  */
+
 export class JsFile {
     constructor(filePath) {
         this.filePath = filePath;

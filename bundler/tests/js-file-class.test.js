@@ -31,6 +31,23 @@ import { RegexTools } from './regexTools.js'; this is the rest of the file `;
     it('finds the export lines in the file last', () => {
         const text1 = `export const fun = () => {return 4}; export class Bricks {} `;
         const lineImports = JsFile.getExportLines(text1);
-        expect(lineImports.join(',')).toBe(' this is the rest of the file ');
+        console.dir(lineImports);
+        expect(JSON.stringify(lineImports)).toBe(
+            JSON.stringify([
+                {
+                    exportedExpression: 'export const fun ',
+                    exportType: 'const',
+                    exportValue: 'fun ',
+                    line: 'export const fun = () => {return 4}; ',
+                },
+
+                {
+                    exportedExpression: 'export class Bricks ',
+                    exportType: 'class',
+                    exportValue: 'Bricks ',
+                    line: 'export class Bricks {} ',
+                },
+            ])
+        );
     });
 });

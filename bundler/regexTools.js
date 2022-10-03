@@ -1,7 +1,11 @@
+/**
+ * @typedef {import('./js-file-class').ExportLine} ExportLine
+ * @typedef {import('./js-file-class').ExportLine} ImportLine
+ */
 const RegexTools = {
     ImportRegex:
         /import(?:(?:(?:[ \n\t]+([^ *\n\t\{\},]+)[ \n\t]*(?:,|[ \n\t]+))?([ \n\t]*\{(?:[ \n\t]*[^ \n\t"'\{\}]+[ \n\t]*,?)+\})?[ \n\t]*)|[ \n\t]*\*[ \n\t]*as[ \n\t]+([^ \n\t\{\}]+)[ \n\t]+)from[ \n\t]*(?:['"])([^'"\n]+)(['"])(\n|\t|;)/g,
-    ExportRegex: /export\s(?:const|let|function|var|default)\s[^)}={;]/g,
+    ExportRegex: /export\s(const|let|function|var|default|class)\s([^)}={;]+)/g,
 
     ImportsNamesIndex: 2,
     ImportRegexURLPathIndex: 4,
@@ -22,9 +26,24 @@ const RegexTools = {
             return { importedNames, importPath, importLine: allOfTheLine };
         });
     },
+    /**@type {(txt:string)=>ExportLine[]} */
     getExportLines(txt) {
-        return Array.from(txt.matchAll(this.ExportRegex)).filter((ex) => ex);
+        const exportLines = txt
+            .split('export')
+            .filter((t) => t)
+            .map((t) => 'export' + t);
+
+        return exportLines.map(
+            (line) =>
+                Array.from(line.matchAll(this.ExportRegex))
+                    .filter((ex) => ex)
+                    .map((ex) => ({
+                        exportedExpression: ex[0],
+                        exportType: ex[1],
+                        exportValue: ex[2],
+                        line,
+                    }))[0]
+        );
     },
 };
-
 export { RegexTools };
