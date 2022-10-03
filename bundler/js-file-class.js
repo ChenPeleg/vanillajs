@@ -20,7 +20,6 @@ export class JsFile {
      * @returns {string} */
     static deleteImportLines(txt, importLines) {
         let textWithoutImports = txt;
-
         importLines.forEach((line) => {
             textWithoutImports = textWithoutImports.replace(
                 line.importLine,
