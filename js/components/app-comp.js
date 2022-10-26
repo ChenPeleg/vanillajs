@@ -1,5 +1,3 @@
-
-
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
@@ -17,27 +15,21 @@ template.innerHTML = `
 `;
 
 class SearchResult extends HTMLElement {
-  constructor() {
-    super();
-    this.attachShadow({ mode: 'open' });
-    /**@type  {ShadowRoot}*/
-    // @ts-ignore
-    this.shadowRoot.appendChild(template.content.cloneNode(true));
+    constructor() {
+        super();
+        this.attachShadow({ mode: 'open' });
+        /**@type  {ShadowRoot}*/
+        // @ts-ignore
+        this.shadowRoot.appendChild(template.content.cloneNode(true));
+    }
 
-  }
+    static get observedAttributes() {
+        return ['name-attribute'];
+    }
 
-  static get observedAttributes() {
-    return ['name-attribute'];
-  }
-
-  attributeChangedCallback(name, oldValue, newValue) {
-
-  }
+    attributeChangedCallback(name, oldValue, newValue) {}
 }
 
 window.customElements.define('app-main', SearchResult);
 
-export {
-
-
-}
+export {};

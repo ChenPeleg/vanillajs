@@ -1,18 +1,19 @@
 {
-  "name": "vanilla-js",
-  "engines": {
-    "node": "18"
-  },
-  "type": "module",
-  "scripts": {
-    "deploy": "gh-pages -d dist",
-    "test": "node ./testing/index.js",
-    "build": "node ./bundler/bundler.js",
-    "lint": "eslint --fix js/*.js"
-  },
-  "dependencies": {
-    "eslint": "^8.26.0",
-    "gh-pages": "^4.0.0",
-    "prettier": "^2.7.1"
-  }
+    "name": "vanilla-js",
+    "engines": {
+        "node": "18"
+    },
+    "type": "module",
+    "scripts": {
+        "deploy": "gh-pages -d dist",
+        "test": "node ./testing/index.js",
+        "build": "node ./bundler/bundler.js",
+        "lint": "eslint --fix js/*.js",
+        "format": "prettier --write ."
+    },
+    "dependencies": {
+        "eslint": "^8.26.0",
+        "gh-pages": "^4.0.0",
+        "prettier": "^2.7.1"
+    }
 }

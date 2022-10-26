@@ -1,5 +1,3 @@
-
-
 // export class RoutesEnumOld {
 //     static protoype = Symbol('Protoype');
 //     static about = Symbol('about');
@@ -8,7 +6,7 @@
 //     closure = Symbol('closure')
 //     constructor() {
 
-import { EnumValidator } from "../Utils/Enum.js";
+import { EnumValidator } from '../Utils/Enum.js';
 
 //     }
 // }
@@ -19,4 +17,4 @@ export const RoutesEnum = {
     about: 1,
     closure: 2,
 };
-EnumValidator(RoutesEnum)
+EnumValidator(RoutesEnum);
