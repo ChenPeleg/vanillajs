@@ -11,6 +11,8 @@
     "lint": "eslint --fix **"
   },
   "dependencies": {
-    "gh-pages": "^4.0.0"
+    "eslint": "^8.26.0",
+    "gh-pages": "^4.0.0",
+    "prettier": "^2.7.1"
   }
 }
