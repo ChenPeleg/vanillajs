@@ -8,7 +8,7 @@
     "deploy": "gh-pages -d dist",
     "test": "node ./testing/index.js",
     "build": "node ./bundler/bundler.js",
-    "lint": "eslint --fix **"
+    "lint": "eslint --fix js/*.js"
   },
   "dependencies": {
     "eslint": "^8.26.0",
