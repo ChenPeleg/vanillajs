@@ -2,6 +2,7 @@ const template = document.createElement('template');
 template.innerHTML = `
   <style>
     div {
+   
       margin-top: 20px;
       color: green;
       // background-color: white;
@@ -9,7 +10,7 @@ template.innerHTML = `
     }
   </style>
   <div>
-  <div id="router-outlet"></div>
+  <div id='router-outlet'></div>
    App main
   </div>
 `;
