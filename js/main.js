@@ -1,4 +1,3 @@
-import { Utils } from './Utils/utils.js';
 //import * as appComp from "./components/app-comp.js"
 import { PageModel } from './models/page-model.js';
 import { RoutesEnum } from './models/routes.js';
@@ -8,13 +7,13 @@ import { ProtoTypes } from './pages/prototypes.js';
 
 class mainApp {
     constructor() {
-        //this.popHandler.bind(this);
         /**@type {PageModel []} */
         this.pages = this.createPages();
         this.createRouterLinks(this.pages);
         this.setElementPointers();
         window.addEventListener('popstate', (ev) => this.popHandler(ev));
     }
+
     createPages() {
         const root = /**@type {HTMLElement} */ (
             document.querySelector('#pages-outlet')
@@ -24,19 +23,20 @@ class mainApp {
             const page = new PageModel(RoutesEnum[key]);
             switch (RoutesEnum[key]) {
                 case RoutesEnum.about:
-                    page.classPointer = new About();
+                    page.componentPointer = new About();
                     break;
                 case RoutesEnum.closure:
-                    page.classPointer = new Closure();
+                    page.componentPointer = new Closure();
                     break;
                 case RoutesEnum.protoype:
-                    page.classPointer = new ProtoTypes(root);
+                    page.componentPointer = new ProtoTypes(root);
                     break;
             }
             pagesArr.push(page);
         });
         return pagesArr;
     }
+
     /**@type { (pages: PageModel[]) =>void }*/
     createRouterLinks(pages) {
         const linkContainer = /**@type {HTMLDivElement} */ (
@@ -63,12 +63,14 @@ class mainApp {
             } else l.classList.remove('active');
         });
     }
+
     /** @type {(link : PageModel)=> void} */
     activateRouteComponent(link) {
         // switch (link.page) {
         //     //RoutesEnum.about
         // }
     }
+
     setElementPointers() {
         try {
             // const mainLinksElements = /**@type {NodeListOf <HTMLAnchorElement>} */ (document.querySelectorAll('a.main-links'))
@@ -88,6 +90,7 @@ class mainApp {
         }
     }
 }
+
 const app = new mainApp();
 
 export { app };
