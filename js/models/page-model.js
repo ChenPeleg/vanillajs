@@ -7,13 +7,15 @@ export class PageModel {
         this.name = /**@type {string} */ (
             Object.keys(RoutesEnum).find((k) => RoutesEnum[k] === type)
         );
-
         this.componentPointer = null;
         this.element = null;
     }
 
     set isActive(value) {
         this.#_isActive = value;
+        if (this.componentPointer) {
+            this.componentPointer.active = this.#_isActive;
+        }
     }
 
     get isActive() {

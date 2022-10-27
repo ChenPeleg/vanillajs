@@ -55,12 +55,17 @@ class mainApp {
 
     popHandler(ev) {
         const route = window.location.hash.replace('#', '');
-        console.log(this.pages);
+
         this.pages.forEach((page) => {
             const l = page.element;
+            l.componentPointer = l.componentPointer || {};
             if (l.href.includes(route)) {
+                page.isActive = true;
                 l.classList.add('active');
-            } else l.classList.remove('active');
+            } else {
+                page.isActive = false;
+                l.classList.remove('active');
+            }
         });
     }
 

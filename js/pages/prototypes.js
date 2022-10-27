@@ -18,14 +18,21 @@ export class ProtoTypes {
         globalThis.showChain = (...args) => this.showChain(...args);
         this.renderChain();
     }
+
     #active = false;
     set active(val) {
+        console.log(val);
         this.#active = val;
+        this.container.style.setProperty(
+            'visibility',
+            val ? 'visible' : 'hidden'
+        );
     }
 
     get active() {
         return this.#active;
     }
+
     /** @param  {HTMLElement} root*/
     createContainer(root) {
         const container = document.createElement('div');
@@ -37,15 +44,17 @@ export class ProtoTypes {
         root.appendChild(container);
         return container;
     }
+
     renderChain() {
         const oneChainElement = this.renderOnChainElement({});
         this.container.appendChild(oneChainElement);
         //chainMemberContainer.setStyle = {}
     }
+
     renderOnChainElement(element) {
         const chainMemberContainer = document.createElement('div');
         const chainMemeberArrow = document.createElement('div');
-        /**@type {import("../types/css-types.js").CSSObejct} */
+        /**@type {import('../types/css-types.js').CSSObejct} */
         Utils.styler(chainMemberContainer, {
             height: '100px',
             'background-color': '#AABBAA',
@@ -80,14 +89,17 @@ export class ProtoTypes {
         chainMemberContainer.append(chainMemeberArrow);
         return chainMemberContainer;
     }
+
     generateRandId(name) {
         return name + '_' + Utils.random(10000);
     }
+
     showChain(obj) {
         /**@type {ProtoChainMember[]} */
         const completeChain = this.buildChainObject(obj);
         this.consoleLogChain(completeChain);
     }
+
     buildChainObject(obj) {
         const getProtoChaninToArray = (o, arr = []) => {
             arr.push(o);
@@ -143,6 +155,7 @@ export class ProtoTypes {
         });
         return completeChain;
     }
+
     /**@type {(completeChain : ProtoChainMember[])=> void} */
     consoleLogChain(completeChain) {
         completeChain.forEach((o) => {
