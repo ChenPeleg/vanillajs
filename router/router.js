@@ -4,7 +4,7 @@
  * TODO: relate to complex routes
  */
 
-class HashRouter {
+export class HashRouter {
     #subscriptions = [];
     #route = this.#requestHash();
 
@@ -27,6 +27,10 @@ class HashRouter {
         });
     }
 
+    /**
+     * @param {(route : any)=>void} callBack
+     * @return void
+     */
     subscribe(callBack) {
         this.#subscriptions.push(callBack);
     }

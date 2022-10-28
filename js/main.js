@@ -1,9 +1,9 @@
-//import * as appComp from "./components/app-comp.js"
 import { PageModel } from './models/page-model.js';
 import { RoutesEnum } from './models/routes.js';
 import { About } from './pages/about.js';
 import { Closure } from './pages/closure.js';
 import { ProtoTypes } from './pages/prototypes.js';
+import { HashRouter } from '../router/router.js';
 
 class mainApp {
     constructor() {
@@ -11,7 +11,11 @@ class mainApp {
         this.pages = this.createPages();
         this.createRouterLinks(this.pages);
         this.setElementPointers();
-        window.addEventListener('popstate', (ev) => this.popHandler(ev));
+        this.router = new HashRouter();
+        this.router.subscribe((hash) => {
+            this.popHandler(hash);
+        });
+        // window.addEventListener('popstate', (ev) => this.popHandler(ev));
     }
 
     createPages() {
