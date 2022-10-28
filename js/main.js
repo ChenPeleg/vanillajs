@@ -10,12 +10,10 @@ class mainApp {
         /**@type {PageModel []} */
         this.pages = this.createPages();
         this.createRouterLinks(this.pages);
-        this.setElementPointers();
         this.router = new HashRouter();
         this.router.subscribe((hash) => {
             this.popHandler(hash);
         });
-        // window.addEventListener('popstate', (ev) => this.popHandler(ev));
     }
 
     createPages() {
@@ -57,7 +55,7 @@ class mainApp {
         });
     }
 
-    popHandler(ev) {
+    popHandler(_ev) {
         const route = window.location.hash.replace('#', '');
 
         this.pages.forEach((page) => {
@@ -72,34 +70,6 @@ class mainApp {
             }
         });
     }
-
-    /** @type {(link : PageModel)=> void} */
-    activateRouteComponent(link) {
-        // switch (link.page) {
-        //     //RoutesEnum.about
-        // }
-    }
-
-    setElementPointers() {
-        try {
-            // const mainLinksElements = /**@type {NodeListOf <HTMLAnchorElement>} */ (document.querySelectorAll('a.main-links'))
-            // this.mainLinks = [...mainLinksElements].map(l => {
-            //     return new PageModel(l.href.replace('#', ''), l)
-            // });
-
-            const appmain = /**@type {Element & {shadowRoot}} */ (
-                document.querySelector('app-main')
-            );
-            const outlet = /**@type {Element} */ (
-                appmain.shadowRoot.querySelector('#router-outlet')
-            );
-            this.routerOutlet = outlet;
-        } catch (e) {
-            setTimeout(() => this.setElementPointers(), 1000);
-        }
-    }
 }
 
-const app = new mainApp();
-
-export { app };
+export const app = new mainApp();
