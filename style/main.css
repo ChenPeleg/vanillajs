@@ -1,12 +1,11 @@
 body {
-    background-color: rgb(167, 241, 241);
-    background: radial-gradient(
-        circle,
-        rgba(203, 209, 237, 1) 0%,
-        rgba(221, 192, 198, 1) 100%
+    background: rgb(167, 241, 241) radial-gradient(
+            circle,
+            rgba(203, 209, 237, 1) 0%,
+            rgba(221, 192, 198, 1) 100%
     );
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
-        sans-serif;
+    sans-serif;
     padding: 0rem 1rem 1rem 1rem;
     font-size: 24px;
 }
@@ -29,10 +28,14 @@ h3 {
     font-size: 3.5rem;
     color: rgb(90, 59, 14);
     text-shadow: 2px 4px 4px rgba(27, 27, 26, 0.5),
-        1px 1px 1px rgba(230, 241, 230, 0.5);
+    1px 1px 1px rgba(230, 241, 230, 0.5);
 }
 
 .divider {
+}
+
+.mr-1 {
+    margin: 1em;
 }
 
 a.main-links {

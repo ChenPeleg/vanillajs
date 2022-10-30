@@ -15,6 +15,7 @@ export class ProtoTypes {
     constructor(rootElement) {
         this.isActiveRoute = false;
         this.container = this.createContainer(rootElement);
+        // eslint-disable-next-line no-undef
         globalThis.showChain = (...args) => this.showChain(...args);
         this.renderChain();
     }
@@ -23,10 +24,7 @@ export class ProtoTypes {
     set active(val) {
         console.log(val);
         this.#active = val;
-        this.container.style.setProperty(
-            'visibility',
-            val ? 'visible' : 'hidden'
-        );
+        this.container.style.setProperty('visibility', val ? 'visible' : 'hidden');
     }
 
     get active() {
@@ -36,11 +34,8 @@ export class ProtoTypes {
     /** @param  {HTMLElement} root*/
     createContainer(root) {
         const container = document.createElement('div');
-        container.id = this.generateRandId(
-            Object.getPrototypeOf(this).constructor.name
-        );
-        container.innerHTML =
-            Object.getPrototypeOf(this).constructor.name + ' ';
+        container.id = this.generateRandId(Object.getPrototypeOf(this).constructor.name);
+        container.innerHTML = Object.getPrototypeOf(this).constructor.name + ' ';
         root.appendChild(container);
         return container;
     }
@@ -104,9 +99,7 @@ export class ProtoTypes {
         const getProtoChaninToArray = (o, arr = []) => {
             arr.push(o);
             const proto = Object.getPrototypeOf(o);
-            return proto
-                ? getProtoChaninToArray(proto, arr)
-                : arr.concat([proto]);
+            return proto ? getProtoChaninToArray(proto, arr) : arr.concat([proto]);
         };
         const getSpecialType = (o) => {
             switch (o) {
@@ -159,11 +152,7 @@ export class ProtoTypes {
     /**@type {(completeChain : ProtoChainMember[])=> void} */
     consoleLogChain(completeChain) {
         completeChain.forEach((o) => {
-            const text =
-                'Level: ' +
-                o.level +
-                ' ' +
-                (o.specialType || o.description + ' (' + o.typeOf + ')');
+            const text = 'Level: ' + o.level + ' ' + (o.specialType || o.description + ' (' + o.typeOf + ')');
             console.log(text);
             console.dir(o);
 
