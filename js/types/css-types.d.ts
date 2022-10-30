@@ -178,5 +178,5 @@ const CSSProps = {
     filter: '',
 };
 //@es-ignore
-export type CSSObejct = Partial<typeof CSSProps>;
-export type CSS = Record<string, CSSObejct>;
+export type CSSObject = Partial<typeof CSSProps>;
+export type CSS = Record<string, CSSObject>;

@@ -1,5 +1,6 @@
 import { BaseStyles } from '../styles/baseStyles.js';
 import { Utils } from '../Utils/utils.js';
+import { Comp } from '../../composer/composer.js';
 
 /**
  * @typedef ProtoChainMember
@@ -35,7 +36,9 @@ export class ProtoTypes {
     createContainer(root) {
         const container = document.createElement('div');
         container.id = this.generateRandId(Object.getPrototypeOf(this).constructor.name);
-        container.innerHTML = Object.getPrototypeOf(this).constructor.name + ' ';
+        const header = new Comp({ tag: 'div', text: 'Prototype Chain', style: { margin: '0.5em' } }).elem;
+        container.appendChild(header);
+        //container.innerHTML = Object.getPrototypeOf(this).constructor.name + ' ';
         root.appendChild(container);
         return container;
     }
@@ -49,7 +52,7 @@ export class ProtoTypes {
     renderOnChainElement(element) {
         const chainMemberContainer = document.createElement('div');
         const chainMemeberArrow = document.createElement('div');
-        /**@type {import('../types/css-types.js').CSSObejct} */
+        /** @type {import('../types/css-types.js').CSSObject} */
         Utils.styler(chainMemberContainer, {
             height: '100px',
             'background-color': '#AABBAA',

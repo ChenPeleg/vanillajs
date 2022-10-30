@@ -1,4 +1,4 @@
-/**@type {Record<string, import("../types/css-types.js").CSSObejct>} */
+/**@type {Record<string, import('../types/css-types.js').CSSObject>} */
 export const BaseStyles = {
     flexCol: {
         display: 'flex',
