@@ -18,7 +18,7 @@ export class ProtoTypes {
         this.container = this.createContainer(rootElement);
         // eslint-disable-next-line no-undef
         globalThis.showChain = (...args) => this.showChain(...args);
-        this.renderChain();
+        //this.renderChain();
     }
 
     #active = false;
@@ -43,9 +43,13 @@ export class ProtoTypes {
         return container;
     }
 
-    renderChain() {
-        const oneChainElement = this.renderOnChainElement({});
-        this.container.appendChild(oneChainElement);
+    /**@type {(chain :ProtoChainMember[])=>void} */
+    renderChain(chain) {
+        chain.forEach((el) => {
+            const oneChainElement = this.renderOnChainElement(el);
+            this.container.appendChild(oneChainElement);
+        });
+
         //chainMemberContainer.setStyle = {}
     }
 
@@ -95,6 +99,7 @@ export class ProtoTypes {
     showChain(obj) {
         /**@type {ProtoChainMember[]} */
         const completeChain = this.buildChainObject(obj);
+        this.renderChain(completeChain);
         this.consoleLogChain(completeChain);
     }
 
