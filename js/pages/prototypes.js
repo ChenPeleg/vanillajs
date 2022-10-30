@@ -15,10 +15,11 @@ export class ProtoTypes {
     /** @param  {HTMLElement} rootElement*/
     constructor(rootElement) {
         this.isActiveRoute = false;
+        this.chainContainer = new Comp('div').elem;
         this.container = this.createContainer(rootElement);
         // eslint-disable-next-line no-undef
         globalThis.showChain = (...args) => this.showChain(...args);
-        //this.renderChain();
+        this.renderChain(this.buildChainObject([]));
     }
 
     #active = false;
@@ -38,22 +39,24 @@ export class ProtoTypes {
         container.id = this.generateRandId(Object.getPrototypeOf(this).constructor.name);
         const header = new Comp({ tag: 'div', text: 'Prototype Chain', style: { margin: '0.5em' } }).elem;
         container.appendChild(header);
-        //container.innerHTML = Object.getPrototypeOf(this).constructor.name + ' ';
+        container.appendChild(this.chainContainer);
         root.appendChild(container);
         return container;
     }
 
-    /**@type {(chain :ProtoChainMember[])=>void} */
+    /** @param {ProtoChainMember[]} chain*/
     renderChain(chain) {
+        this.chainContainer.innerHTML = '';
         chain.forEach((el) => {
             const oneChainElement = this.renderOnChainElement(el);
-            this.container.appendChild(oneChainElement);
+            this.chainContainer.appendChild(oneChainElement);
         });
 
         //chainMemberContainer.setStyle = {}
     }
 
-    renderOnChainElement(element) {
+    /** @param {ProtoChainMember } chainElem*/
+    renderOnChainElement(chainElem) {
         const chainMemberContainer = document.createElement('div');
         const chainMemeberArrow = document.createElement('div');
         /** @type {import('../types/css-types.js').CSSObject} */
@@ -62,6 +65,7 @@ export class ProtoTypes {
             'background-color': '#AABBAA',
             width: '200px',
             'border-radius': '4px',
+            margin: '20px',
             'box-shadow': '2px 2px 4px rgba(0,0,0,.5)',
             'font-size': '22px',
             'justify-content': 'center',
@@ -83,8 +87,9 @@ export class ProtoTypes {
             'align-self': 'flex-end',
         });
 
-        chainMemeberLevelHeader.innerHTML = 'Level 1';
-        chainMemeberHeader.innerHTML = 'String.Protoype';
+        chainMemeberLevelHeader.innerHTML = 'Level: ' + chainElem.level + ' ';
+        //
+        chainMemeberHeader.innerHTML = chainElem.specialType || chainElem.description + ' (' + chainElem.typeOf + ')';
         chainMemeberArrow.innerHTML = '↓';
         chainMemberContainer.append(chainMemeberLevelHeader);
         chainMemberContainer.append(chainMemeberHeader);
