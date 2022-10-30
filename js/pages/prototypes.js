@@ -58,7 +58,13 @@ export class ProtoTypes {
     /** @param {ProtoChainMember } chainElem*/
     renderOnChainElement(chainElem) {
         const chainMemberContainer = document.createElement('div');
-        const chainMemeberArrow = document.createElement('div');
+        const chainMemeberArrow = new Comp('div').styler({
+            width: '99%',
+            textAlign: 'center',
+            display: 'flex',
+            alignItems: 'center',
+            'justify-content': 'center',
+        }).elem;
         /** @type {import('../types/css-types.js').CSSObject} */
         Utils.styler(chainMemberContainer, {
             height: '100px',
@@ -66,7 +72,7 @@ export class ProtoTypes {
             width: '200px',
             'border-radius': '4px',
             margin: '20px',
-            'box-shadow': '2px 2px 4px rgba(0,0,0,.5)',
+            'box-shadow': '2px 2px 6px rgba(0,0,0,.5)',
             'font-size': '22px',
             'justify-content': 'center',
             ...BaseStyles.flexCol,
@@ -82,15 +88,14 @@ export class ProtoTypes {
         });
 
         Utils.styler(chainMemeberArrow, {
-            'font-size': '40px',
+            'font-size': '35px',
             'font-weight': '700',
-            'align-self': 'flex-end',
         });
 
         chainMemeberLevelHeader.innerHTML = 'Level: ' + chainElem.level + ' ';
         //
         chainMemeberHeader.innerHTML = chainElem.specialType || chainElem.description + ' (' + chainElem.typeOf + ')';
-        chainMemeberArrow.innerHTML = '↓';
+        chainMemeberArrow.innerHTML = '<span>↓</span>';
         chainMemberContainer.append(chainMemeberLevelHeader);
         chainMemberContainer.append(chainMemeberHeader);
         chainMemberContainer.append(chainMemeberArrow);

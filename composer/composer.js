@@ -22,8 +22,10 @@ export class Comp {
         this.elem.id = id;
     }
 
-    /** @type {(  styleObj : import('../types/css-types.js').CSSObject)=>void} */
+    /** @property {  styleObj : import('../types/css-types.js').CSSObject }
+     * @return Comp*/
     styler(styleObj) {
         Object.keys(styleObj).forEach((prop) => this.elem.style.setProperty([prop], styleObj[prop]));
+        return this;
     }
 }
