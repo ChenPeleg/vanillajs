@@ -1,6 +1,6 @@
 import { BaseStyles } from '../styles/baseStyles.js';
 import { Utils } from '../Utils/utils.js';
-import { Comp } from '../../composer/composer.js';
+import { C } from '../../composer/c-frame.js';
 
 /**
  * @typedef ProtoChainMember
@@ -10,12 +10,11 @@ import { Comp } from '../../composer/composer.js';
  * @prop {string} specialType
  * @prop {string} typeOf
  */
-
 export class ProtoTypes {
     /** @param  {HTMLElement} rootElement*/
     constructor(rootElement) {
         this.isActiveRoute = false;
-        this.chainContainer = new Comp('div').elem;
+        this.chainContainer = C('div').elem;
         this.container = this.createContainer(rootElement);
         // eslint-disable-next-line no-undef
         globalThis.showChain = (...args) => this.showChain(...args);
@@ -24,7 +23,6 @@ export class ProtoTypes {
 
     #active = false;
     set active(val) {
-        console.log(val);
         this.#active = val;
         this.container.style.setProperty('visibility', val ? 'visible' : 'hidden');
     }
@@ -37,7 +35,7 @@ export class ProtoTypes {
     createContainer(root) {
         const container = document.createElement('div');
         container.id = this.generateRandId(Object.getPrototypeOf(this).constructor.name);
-        const header = new Comp({ tag: 'div', text: 'Prototype Chain', style: { margin: '0.5em' } }).elem;
+        const header = C({ tag: 'div', text: 'Prototype Chain', style: { margin: '0.5em' } }).elem;
         container.appendChild(header);
         container.appendChild(this.chainContainer);
         root.appendChild(container);
@@ -58,7 +56,7 @@ export class ProtoTypes {
     /** @param {ProtoChainMember } chainElem*/
     renderOnChainElement(chainElem) {
         const chainMemberContainer = document.createElement('div');
-        const chainMemeberArrow = new Comp('div').styler({
+        const chainMemeberArrow = C('div').styler({
             width: '99%',
             textAlign: 'center',
             display: 'flex',

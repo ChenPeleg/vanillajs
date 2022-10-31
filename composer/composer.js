@@ -6,7 +6,7 @@
  * @member {import('../types/css-types.js').CSSObject} style
  */
 
-export class Comp {
+export class Composer {
     /** @param {CProps} options   */
     constructor(options) {
         let { tag, id, text, style } = options;
@@ -23,9 +23,18 @@ export class Comp {
     }
 
     /** @property {  styleObj : import('../types/css-types.js').CSSObject }
-     * @return Comp*/
+     * @return C*/
     styler(styleObj) {
         Object.keys(styleObj).forEach((prop) => this.elem.style.setProperty([prop], styleObj[prop]));
         return this;
+    }
+
+    /**
+     * @param {C } childComponents
+     */
+    append(...childComponents) {
+        childComponents.forEach((c) => {
+            this.elem.appendChild(c);
+        });
     }
 }
