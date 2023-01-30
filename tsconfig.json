@@ -1,8 +1,15 @@
 {
     "compilerOptions": {
         "allowJs": true,
+        "checkJs": false,
         "typeRoots": ["./typings"],
         "outFile": "./justANameToMakeTSHappy.js",
-        "module": "System"
+        "module": "System",
+      "lib": [
+        "dom",
+        "es5",
+        "scripthost",
+        "es2015.promise"
+      ]
     }
 }

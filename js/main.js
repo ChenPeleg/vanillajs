@@ -17,9 +17,7 @@ class mainApp {
     }
 
     createPages() {
-        const root = /**@type {HTMLElement} */ (
-            document.querySelector('#pages-outlet')
-        );
+        const root = /**@type {HTMLElement} */ (document.querySelector('#pages-outlet'));
         const pagesArr = [];
         Object.keys(RoutesEnum).forEach((key) => {
             const page = new PageModel(RoutesEnum[key]);
@@ -41,9 +39,7 @@ class mainApp {
 
     /**@type { (pages: PageModel[]) =>void }*/
     createRouterLinks(pages) {
-        const linkContainer = /**@type {HTMLDivElement} */ (
-            document.querySelector('#the-link-container')
-        );
+        const linkContainer = /**@type {HTMLDivElement} */ (document.querySelector('#the-link-container'));
 
         pages.forEach((page) => {
             const a = document.createElement('a');
@@ -59,6 +55,7 @@ class mainApp {
         const route = window.location.hash.replace('#', '');
 
         this.pages.forEach((page) => {
+            let g = page.gold;
             const l = page.element;
             l.componentPointer = l.componentPointer || {};
             if (l.href.includes(route)) {
